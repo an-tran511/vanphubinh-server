@@ -11,6 +11,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
 const AuthController = () => import('#controllers/auth_controller')
+const UomController = () => import('#controllers/uom_controller')
 
 router
   .get('/', async () => {
@@ -30,3 +31,4 @@ router
     router.post('/logout', [AuthController, 'logout'])
   })
   .prefix('auth')
+router.resource('uoms', UomController).apiOnly()
