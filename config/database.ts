@@ -6,9 +6,10 @@ import { SeedManager } from '@mikro-orm/seeder'
 import { Migrator } from '@mikro-orm/migrations'
 import { CustomMigrationGenerator } from '#database/custom_migrator'
 import Uom from '#models/uom'
+import ItemCategory from '#models/item_catgory'
 
 const databaseConfig: Options = {
-  entities: [User, Uom],
+  entities: [User, Uom, ItemCategory],
   host: env.get('DB_HOST'),
   port: Number(env.get('DB_PORT')) || 5432,
   user: env.get('DB_USER'),
