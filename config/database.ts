@@ -5,9 +5,10 @@ import User from '#models/user'
 import { SeedManager } from '@mikro-orm/seeder'
 import { Migrator } from '@mikro-orm/migrations'
 import { CustomMigrationGenerator } from '#database/custom_migrator'
+import Uom from '#models/uom'
 
 const databaseConfig: Options = {
-  entities: [User],
+  entities: [User, Uom],
   host: env.get('DB_HOST'),
   port: Number(env.get('DB_PORT')) || 5432,
   user: env.get('DB_USER'),
