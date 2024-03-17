@@ -12,6 +12,7 @@ import { middleware } from './kernel.js'
 
 const AuthController = () => import('#controllers/auth_controller')
 const UomController = () => import('#controllers/uom_controller')
+const ItemCategoryController = () => import('#controllers/item_category_controller')
 
 router
   .get('/', async () => {
@@ -32,3 +33,4 @@ router
   })
   .prefix('auth')
 router.resource('uoms', UomController).apiOnly()
+router.resource('item-categories', ItemCategoryController).apiOnly()
