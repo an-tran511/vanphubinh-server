@@ -20,7 +20,7 @@ const bodyParserConfig = defineConfig({
    * Config for the JSON parser
    */
   json: {
-    convertEmptyStringsToNull: true,
+    convertEmptyStringsToNull: false,
     types: [
       'application/json',
       'application/json-patch+json',

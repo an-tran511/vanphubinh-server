@@ -12,20 +12,19 @@ export default class Partner extends BaseEntity {
   id?: string
 
   @Property({ type: 'text' })
-  @Index({ type: 'fulltext' })
   name!: string
 
-  @Property({ type: 'text', nullable: true })
-  address!: string | null
+  @Property({ type: 'text' })
+  address!: string
 
-  @Property({ type: 'text', nullable: true })
-  phone!: string | null
+  @Property({ type: 'text' })
+  phone!: string
 
-  @Property({ type: 'text', nullable: true })
-  email!: string | null
+  @Property({ type: 'text' })
+  email!: StringConstructor
 
-  @Property({ type: 'text', nullable: true })
-  notes!: string | null
+  @Property({ type: 'text' })
+  notes!: string
 
   @Property({ hidden: true })
   createdAt = new Date()
