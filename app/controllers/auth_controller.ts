@@ -22,7 +22,7 @@ export default class AuthController {
     }
 
     await auth.use('web').login(user)
-    response.ok({ user })
+    response.ok({ success: true, user })
   }
 
   async me({ auth, response }: HttpContext) {
