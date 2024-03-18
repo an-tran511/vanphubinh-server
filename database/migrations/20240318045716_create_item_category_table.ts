@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations'
 
-export class Migration20240317141803CreateItemCategoryTable extends Migration {
+export class Migration20240318045716CreateItemCategoryTable extends Migration {
   async up(): Promise<void> {
     this.addSql(
       `create table "item_category" (
@@ -16,10 +16,10 @@ export class Migration20240317141803CreateItemCategoryTable extends Migration {
 
     this.addSql(
       `alter table "item_category" add constraint "item_category_parent_item_category_id_foreign"
-        foreign key ("parent_item_category_id")
-        references "item_category" ("id")
-        on update cascade
-        on delete set null;`
+      foreign key("parent_item_category_id")
+      references "item_category"("id")
+      on update cascade
+      on delete set null; `
     )
   }
 

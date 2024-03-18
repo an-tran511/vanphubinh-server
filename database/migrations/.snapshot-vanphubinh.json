@@ -1,7 +1,5 @@
 {
-  "namespaces": [
-    "public"
-  ],
+  "namespaces": ["public"],
   "name": "public",
   "tables": [
     {
@@ -68,9 +66,7 @@
       "indexes": [
         {
           "keyName": "item_category_pkey",
-          "columnNames": [
-            "id"
-          ],
+          "columnNames": ["id"],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -81,13 +77,9 @@
       "foreignKeys": {
         "item_category_parent_item_category_id_foreign": {
           "constraintName": "item_category_parent_item_category_id_foreign",
-          "columnNames": [
-            "parent_item_category_id"
-          ],
+          "columnNames": ["parent_item_category_id"],
           "localTableName": "public.item_category",
-          "referencedColumnNames": [
-            "id"
-          ],
+          "referencedColumnNames": ["id"],
           "referencedTableName": "public.item_category",
           "deleteRule": "set null",
           "updateRule": "cascade"
@@ -104,6 +96,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "lpad(nextval('partner_seq')::text,4,'0')",
           "mappedType": "text"
         },
         "name": {
@@ -177,9 +170,7 @@
       "indexes": [
         {
           "keyName": "partner_pkey",
-          "columnNames": [
-            "id"
-          ],
+          "columnNames": ["id"],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -236,9 +227,7 @@
       "indexes": [
         {
           "keyName": "uom_pkey",
-          "columnNames": [
-            "id"
-          ],
+          "columnNames": ["id"],
           "composite": false,
           "constraint": true,
           "primary": true,
@@ -304,9 +293,7 @@
       "indexes": [
         {
           "keyName": "user_pkey",
-          "columnNames": [
-            "email"
-          ],
+          "columnNames": ["email"],
           "composite": false,
           "constraint": true,
           "primary": true,
