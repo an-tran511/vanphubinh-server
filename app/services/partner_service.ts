@@ -1,6 +1,6 @@
 import { ListPageParams } from '#validators/list_page_params'
 import { partnerRepository, em } from '#services/database_service'
-import { PartnerInput, PartnerInputSchema } from '#validators/partner'
+import { PartnerInput } from '#validators/partner'
 import Partner from '#models/partner'
 import { wrap } from '@mikro-orm/postgresql'
 

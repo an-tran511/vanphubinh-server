@@ -21,7 +21,7 @@ export default class Partner extends BaseEntity {
   phone!: string
 
   @Property({ type: 'text' })
-  email!: StringConstructor
+  email!: string
 
   @Property({ type: 'text' })
   notes!: string
