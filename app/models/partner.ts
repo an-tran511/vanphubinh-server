@@ -1,26 +1,31 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/postgresql'
+import { Entity, Index, PrimaryKey, Property } from '@mikro-orm/postgresql'
 import BaseEntity from '#models/base_entity'
-import { nanoid } from '#utils/id_generator'
 
 @Entity()
 export default class Partner extends BaseEntity {
-  @PrimaryKey({ type: 'text' })
-  id: string = nanoid()
+  @PrimaryKey({
+    type: 'text',
+    defaultRaw: `lpad(nextval('partner_seq')::text,4,'0')`,
+    primary: true,
+    nullable: false,
+  })
+  id?: string
 
   @Property({ type: 'text' })
+  @Index({ type: 'fulltext' })
   name!: string
 
   @Property({ type: 'text', nullable: true })
-  address?: string | null
+  address!: string | null
 
   @Property({ type: 'text', nullable: true })
-  phone?: string | null
+  phone!: string | null
 
   @Property({ type: 'text', nullable: true })
-  email?: string | null
+  email!: string | null
 
   @Property({ type: 'text', nullable: true })
-  notes?: string | null
+  notes!: string | null
 
   @Property({ hidden: true })
   createdAt = new Date()
