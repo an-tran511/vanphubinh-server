@@ -2,7 +2,7 @@ import { ListPageParams } from '#validators/list_page_params'
 import { partnerRepository, em } from '#services/database_service'
 import { PartnerInput, PartnerInputSchema } from '#validators/partner'
 import Partner from '#models/partner'
-import { parse } from 'valibot'
+import { wrap } from '@mikro-orm/postgresql'
 
 export class PartnerService {
   async findMany({ searchValue, page, perPage }: ListPageParams) {
@@ -17,6 +17,19 @@ export class PartnerService {
   async store(data: PartnerInput) {
     const partner = em.create(Partner, data)
     await em.persistAndFlush(partner)
+    return partner
+  }
+
+  async findById(id: string) {
+    const partner = partnerRepository.findOneOrFail(id)
+    return partner
+  }
+
+  async update(id: string, data: PartnerInput) {
+    const partner = await partnerRepository.findOne(id)
+    if (partner) {
+      wrap(partner).assign({ id, ...data })
+    }
     return partner
   }
 }

@@ -27,12 +27,27 @@ export default class PartnerController {
     return partner
   }
 
-  async show({}: HttpContext) {
-    return 'Show Partner'
+  async show({ request, response }: HttpContext) {
+    const id = request.param('id')
+    try {
+      const partner = await this.partnerService.findById(id)
+      return response.ok(partner)
+    } catch (e) {
+      return response.internalServerError(e.message)
+    }
   }
 
-  async update({}: HttpContext) {
-    return 'Update Partner'
+  async update({ request, response }: HttpContext) {
+    const id = request.param('id')
+    const data = request.body()
+    const payload = parse(PartnerInputSchema, data)
+
+    try {
+      const partner = await this.partnerService.update(id, payload)
+      return response.ok(partner)
+    } catch (e) {
+      return response.internalServerError(e.message)
+    }
   }
 
   async destroy({}: HttpContext) {
