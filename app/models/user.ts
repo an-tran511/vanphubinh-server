@@ -11,7 +11,7 @@ import hash from '@adonisjs/core/services/hash'
 
 @Entity()
 export default class User extends BaseEntity {
-  @PrimaryKey({ type: 'text', unique: true })
+  @PrimaryKey({ type: 'text', unique: true, primary: true })
   email!: string
 
   @Property({ type: 'text', hidden: true })

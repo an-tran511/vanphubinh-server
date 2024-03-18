@@ -12,7 +12,7 @@ import { nanoid } from '#utils/id_generator'
 
 @Entity()
 export default class ItemCategory extends BaseEntity {
-  @PrimaryKey({ type: 'text' })
+  @PrimaryKey({ type: 'text', primary: true })
   id: string = nanoid()
 
   @Property({ type: 'text' })

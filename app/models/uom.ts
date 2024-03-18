@@ -9,7 +9,7 @@ export default class Uom extends BaseEntity {
     this.name = name
   }
 
-  @PrimaryKey({ type: 'text' })
+  @PrimaryKey({ type: 'text', primary: true })
   id: string = nanoid()
 
   @Property({ type: 'text' })
