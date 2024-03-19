@@ -8,9 +8,11 @@ import { CustomMigrationGenerator } from '#database/custom_migrator'
 import Uom from '#models/uom'
 import ItemCategory from '#models/item_catgory'
 import Partner from '#models/partner'
+import Item from '#models/item'
+import Packaging from '#models/packaging'
 
 const databaseConfig: Options = {
-  entities: [User, Uom, ItemCategory, Partner],
+  entities: [User, Uom, ItemCategory, Partner, Item, Packaging],
   host: env.get('DB_HOST'),
   port: Number(env.get('DB_PORT')) || 5432,
   user: env.get('DB_USER'),

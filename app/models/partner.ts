@@ -5,7 +5,7 @@ import BaseEntity from '#models/base_entity'
 export default class Partner extends BaseEntity {
   @PrimaryKey({
     type: 'text',
-    defaultRaw: `lpad(nextval('partner_seq')::text,4,'0')`,
+    defaultRaw: `lpad(nextval('partner_seq')::text,3,'0')`,
     primary: true,
     nullable: false,
   })
