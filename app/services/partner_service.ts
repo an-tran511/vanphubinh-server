@@ -26,10 +26,9 @@ export class PartnerService {
   }
 
   async update(id: string, data: PartnerInput) {
-    const partner = await partnerRepository.findOne(id)
-    if (partner) {
-      wrap(partner).assign({ id, ...data })
-    }
+    const partner = await partnerRepository.findOneOrFail(id)
+    wrap(partner).assign(data)
+    await em.flush()
     return partner
   }
 }

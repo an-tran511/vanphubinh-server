@@ -14,7 +14,7 @@ let partnerRepository: EntityRepository<Partner>
 
 app.booted(async () => {
   db = await app.container.make('mikro:db')
-  em = db.em.fork()
+  em = db.em
   userRepository = em.getRepository(User)
   uomRepository = em.getRepository(Uom)
   itemCategoryRepository = em.getRepository(ItemCategory)
