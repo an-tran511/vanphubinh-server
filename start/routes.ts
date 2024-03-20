@@ -14,6 +14,7 @@ const AuthController = () => import('#controllers/auth_controller')
 const UomController = () => import('#controllers/uom_controller')
 const ItemCategoryController = () => import('#controllers/item_category_controller')
 const PartnerController = () => import('#controllers/partner_controller')
+const PackagingController = () => import('#controllers/packaging_controller')
 
 router
   .get('/', async () => {
@@ -36,3 +37,4 @@ router
 router.resource('uoms', UomController).apiOnly()
 router.resource('item-categories', ItemCategoryController).apiOnly()
 router.resource('partners', PartnerController).apiOnly()
+router.resource('packagings', PackagingController).apiOnly()

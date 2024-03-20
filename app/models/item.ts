@@ -7,7 +7,6 @@ import ItemCategory from '#models/item_catgory'
 
 @Entity({
   discriminatorColumn: 'type',
-  discriminatorMap: { packaging: 'Packaging', mould: 'Mould' },
 })
 export default class Item extends BaseEntity {
   @PrimaryKey({ type: 'text', primary: true })

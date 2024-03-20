@@ -3,7 +3,9 @@ import { Entity, Property } from '@mikro-orm/postgresql'
 import Item from '#models/item'
 import { type PackagingAttributesInput as PackagingAttributes } from '#validators/packaging'
 
-@Entity()
+@Entity({
+  discriminatorValue: 'packaging',
+})
 export default class Packaging extends Item {
   @Property({ type: 'json', nullable: true })
   declare attributes: PackagingAttributes
