@@ -1,14 +1,9 @@
-import { OptionalProps, Property } from '@mikro-orm/postgresql'
+import { Opt, Property } from '@mikro-orm/postgresql'
 
-export default abstract class BaseEntity<
-  Entity extends object,
-  Optional extends keyof Entity = never,
-> {
-  [OptionalProps]?: 'createdAt' | 'updatedAt' | Optional
+export default abstract class BaseEntity {
+  @Property({ hidden: true })
+  createdAt: Date & Opt = new Date()
 
-  @Property()
-  createdAt = new Date()
-
-  @Property({ onUpdate: () => new Date() })
-  updatedAt = new Date()
+  @Property({ onUpdate: () => new Date(), hidden: true })
+  updatedAt: Date & Opt = new Date()
 }

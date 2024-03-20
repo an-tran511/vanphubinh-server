@@ -8,7 +8,7 @@ import ItemCategory from '#models/item_catgory'
 @Entity({
   discriminatorColumn: 'type',
 })
-export default class Item extends BaseEntity<Item> {
+export default class Item extends BaseEntity {
   @PrimaryKey({ type: 'text', primary: true })
   id: string = nanoid()
 

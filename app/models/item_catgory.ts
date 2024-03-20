@@ -4,6 +4,7 @@ import {
   Formula,
   ManyToOne,
   OneToMany,
+  type Opt,
   PrimaryKey,
   Property,
 } from '@mikro-orm/postgresql'
@@ -11,7 +12,7 @@ import BaseEntity from '#models/base_entity'
 import { nanoid } from '#utils/id_generator'
 
 @Entity()
-export default class ItemCategory extends BaseEntity<ItemCategory, 'computedName' | 'path'> {
+export default class ItemCategory extends BaseEntity {
   @PrimaryKey({ type: 'text', primary: true })
   id: string = nanoid()
 
@@ -31,16 +32,10 @@ export default class ItemCategory extends BaseEntity<ItemCategory, 'computedName
   childrenItemCategories = new Collection<ItemCategory>(this)
 
   @Property({ type: 'text' })
-  path!: string
+  path!: Opt<string>
 
   @Formula(
     `(case when "parent_item_category_id" is not null then path || ' / ' || name else name end)`
   )
-  computedName?: string
-
-  @Property({ hidden: true })
-  createdAt = new Date()
-
-  @Property({ hidden: true, onUpdate: () => new Date() })
-  updatedAt = new Date()
+  computedName?: Opt<string>
 }
