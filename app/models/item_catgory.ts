@@ -11,7 +11,7 @@ import BaseEntity from '#models/base_entity'
 import { nanoid } from '#utils/id_generator'
 
 @Entity()
-export default class ItemCategory extends BaseEntity {
+export default class ItemCategory extends BaseEntity<ItemCategory, 'computedName' | 'path'> {
   @PrimaryKey({ type: 'text', primary: true })
   id: string = nanoid()
 

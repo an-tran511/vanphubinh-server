@@ -1,7 +1,10 @@
 import { OptionalProps, Property } from '@mikro-orm/postgresql'
 
-export default abstract class BaseEntity {
-  [OptionalProps]?: 'createdAt' | 'updatedAt'
+export default abstract class BaseEntity<
+  Entity extends object,
+  Optional extends keyof Entity = never,
+> {
+  [OptionalProps]?: 'createdAt' | 'updatedAt' | Optional
 
   @Property()
   createdAt = new Date()

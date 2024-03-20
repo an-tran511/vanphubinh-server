@@ -1,8 +1,11 @@
-import { Entity, Index, PrimaryKey, Property } from '@mikro-orm/postgresql'
+import { Entity, PrimaryKey, Property } from '@mikro-orm/postgresql'
 import BaseEntity from '#models/base_entity'
 
 @Entity()
-export default class Partner extends BaseEntity {
+export default class Partner extends BaseEntity<
+  Partner,
+  'address' | 'name' | 'phone' | 'email' | 'notes'
+> {
   @PrimaryKey({
     type: 'text',
     defaultRaw: `lpad(nextval('partner_seq')::text,3,'0')`,

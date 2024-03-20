@@ -3,7 +3,7 @@ import BaseEntity from '#models/base_entity'
 import { nanoid } from '#utils/id_generator'
 
 @Entity()
-export default class Uom extends BaseEntity {
+export default class Uom extends BaseEntity<Uom> {
   constructor(name: string) {
     super()
     this.name = name
