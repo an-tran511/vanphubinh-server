@@ -54,7 +54,12 @@ export class PackagingService {
 
   async update(id: string, data: PackagingInput) {
     const packaging = await packagingRepository.findOneOrFail(id)
-    packagingRepository.assign(packaging, data)
+    packagingRepository.assign(packaging, {
+      ...data,
+      uom: data.uom?.id,
+      customer: data.customer?.id,
+      itemCategory: data.itemCategory?.id,
+    })
     await em.flush()
     await packagingRepository.populate(packaging, ['uom', 'customer', 'itemCategory'])
     return packaging
