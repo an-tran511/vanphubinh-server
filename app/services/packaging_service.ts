@@ -5,8 +5,17 @@ import { PackagingInput } from '#validators/packaging'
 export class PackagingService {
   async findMany({ searchValue, page, perPage }: ListPageParams) {
     const [packagings, total] = await packagingRepository.findAndCount(
-      { name: { $ilike: `%${searchValue}%` } },
-      { limit: perPage, offset: (page - 1) * perPage }
+      {
+        $or: [
+          { name: { $ilike: `%${searchValue}%` } },
+          { itemCode: { $ilike: `%${searchValue}%` } },
+        ],
+      },
+      {
+        limit: perPage,
+        offset: (page - 1) * perPage,
+        populate: ['uom', 'customer', 'itemCategory'],
+      }
     )
     const lastPage = Math.ceil(total / perPage)
     return { data: packagings, meta: { total, page, perPage, lastPage } }
@@ -35,5 +44,19 @@ export class PackagingService {
       ? `${customerId}-${ordNumber[0].nextval}`
       : `000-${ordNumber[0].nextval}`
     return itemCode
+  }
+
+  async show(id: string) {
+    return await packagingRepository.findOneOrFail(id, {
+      populate: ['uom', 'customer', 'itemCategory'],
+    })
+  }
+
+  async update(id: string, data: PackagingInput) {
+    const packaging = await packagingRepository.findOneOrFail(id)
+    packagingRepository.assign(packaging, data)
+    await em.flush()
+    await packagingRepository.populate(packaging, ['uom', 'customer', 'itemCategory'])
+    return packaging
   }
 }

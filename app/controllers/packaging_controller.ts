@@ -31,12 +31,26 @@ export default class PackagingController {
     }
   }
 
-  async show({}: HttpContext) {
-    return 'Show Packaging'
+  async show({ request }: HttpContext) {
+    const param = request.param('id')
+    try {
+      const packaging = await this.packagingService.show(param)
+      return packaging
+    } catch (e) {
+      return e.message
+    }
   }
 
-  async update({}: HttpContext) {
-    return 'Update Packaging'
+  async update({ request }: HttpContext) {
+    const param = request.param('id')
+    const body = request.body()
+    const payload = parse(PackagingInputSchema, body)
+    try {
+      const packaging = await this.packagingService.update(param, payload)
+      return packaging
+    } catch (e) {
+      return e.message
+    }
   }
 
   async destroy({}: HttpContext) {

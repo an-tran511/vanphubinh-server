@@ -35,7 +35,8 @@ export default class ItemCategory extends BaseEntity {
   path!: Opt<string>
 
   @Formula(
-    `(case when "parent_item_category_id" is not null then path || ' / ' || name else name end)`
+    (alias) =>
+      `(case when ${alias}."parent_item_category_id" is not null then ${alias}.path || ' / ' || ${alias}.name else ${alias}.name end)`
   )
   computedName?: Opt<string>
 }
