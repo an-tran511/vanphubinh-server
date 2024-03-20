@@ -3,6 +3,7 @@ import { PackagingService } from '#services/packaging_service'
 import { inject } from '@adonisjs/core'
 import { ListPageParamsSchema } from '#validators/list_page_params'
 import { parse } from 'valibot'
+import { PackagingInputSchema } from '#validators/packaging'
 
 @inject()
 export default class PackagingController {
@@ -19,8 +20,15 @@ export default class PackagingController {
     }
   }
 
-  async store({}: HttpContext) {
-    return 'Create Packaging'
+  async store({ request, response }: HttpContext) {
+    const body = request.body()
+    const payload = parse(PackagingInputSchema, body)
+    try {
+      const newPackaging = await this.packagingService.store(payload)
+      return response.ok(newPackaging)
+    } catch (e) {
+      return response.internalServerError(e.message)
+    }
   }
 
   async show({}: HttpContext) {

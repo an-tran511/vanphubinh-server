@@ -4,9 +4,9 @@ import Item from '#models/item'
 import { type PackagingAttributesInput as PackagingAttributes } from '#validators/packaging'
 
 @Entity({
-  discriminatorValue: 'packaging',
+  discriminatorValue: 'mould',
 })
-export default class Packaging extends Item {
+export default class Mould extends Item {
   // @Property({ type: 'json', nullable: true })
   // declare attributes: PackagingAttributes
 }

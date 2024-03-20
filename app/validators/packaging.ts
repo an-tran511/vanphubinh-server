@@ -1,14 +1,22 @@
-import { Input, object, string, number, merge } from 'valibot'
+import { Input, object, string, number, merge, omit, custom, toTrimmed } from 'valibot'
 import { ItemInputSchema } from '#validators/item'
+import { dimensionRegex } from '#utils/string_matcher'
 
 export const PackagingInputSchema = merge([
-  ItemInputSchema,
+  omit(ItemInputSchema, ['isStockable']),
   object({
     attributes: object({
-      dimension: string(),
-      spreadDimension: string(),
+      dimension: string([
+        toTrimmed(),
+        custom((input) => dimensionRegex.test(String(input)), 'Invalid dimension'),
+      ]),
+      spreadDimension: string([
+        toTrimmed(),
+        custom((input) => dimensionRegex.test(String(input)), 'Invalid dimension'),
+      ]),
       thickness: number(),
       numberOfColors: number(),
+      filmWidth: number(),
     }),
   }),
 ])

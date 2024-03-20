@@ -38,14 +38,16 @@ export default class Item extends BaseEntity {
   })
   defaultSupplier!: Partner | null
 
-  @Property({ type: 'text', unique: true })
-  itemCode!: string
+  @Property({
+    type: 'text',
+  })
+  itemCode: string = ''
 
-  @Property()
+  @Property({ default: true })
   isStockable!: boolean
 
   @Property({ type: 'text' })
-  notes!: string
+  notes: string = ''
 
   @Property({ type: 'json' })
   attributes?: object
