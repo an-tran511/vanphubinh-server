@@ -24,7 +24,7 @@ export default class Item extends BaseEntity {
     entity: () => Partner,
     nullable: true,
   })
-  customer!: Partner | null
+  customer!: Partner
 
   @ManyToOne({
     entity: () => ItemCategory,

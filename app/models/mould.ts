@@ -7,6 +7,6 @@ import { type PackagingAttributesInput as PackagingAttributes } from '#validator
   discriminatorValue: 'mould',
 })
 export default class Mould extends Item {
-  // @Property({ type: 'json', nullable: true })
-  // declare attributes: PackagingAttributes
+  @Property({ type: 'json', nullable: true })
+  declare attributes: PackagingAttributes
 }
