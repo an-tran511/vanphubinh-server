@@ -24,7 +24,7 @@ export default class PurchaseMouldOrder extends BaseEntity {
   mould!: Mould
 
   @Property()
-  createdAt: Date = new Date()
+  createdDate: Date = new Date()
 
   @Property()
   expectedReceivingDate: Date = new Date(new Date().getDate() + 3)
