@@ -54,7 +54,15 @@ export default class Location extends BaseEntity {
 
   @Formula(
     (alias) =>
-      `(case when ${alias}."parent_item_category_id" is not null then ${alias}.path || ' / ' || ${alias}.name else ${alias}.name end)`
+      `(case when ${alias}."parent_location_id" is not null and (
+          select case when exists (
+            select "name"
+            from location
+            where id = ${alias}."parent_location_id" and "type" = 'view'
+          )
+          then false
+          else true end)
+        then ${alias}.path || ' / ' || ${alias}.name else ${alias}.name end)`
   )
   computedName?: Opt<string>
 }
