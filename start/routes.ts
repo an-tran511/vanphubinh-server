@@ -17,6 +17,7 @@ const PartnerController = () => import('#controllers/partner_controller')
 const PackagingController = () => import('#controllers/packaging_controller')
 const WarehouseController = () => import('#controllers/warehouse_controller')
 const LocationController = () => import('#controllers/location_controller')
+const PurchaseMouldOrderController = () => import('#controllers/purchase_mould_order_controller')
 
 router
   .get('/', async () => {
@@ -42,3 +43,4 @@ router.resource('partners', PartnerController).apiOnly()
 router.resource('packagings', PackagingController).apiOnly()
 router.resource('warehouses', WarehouseController).apiOnly()
 router.resource('locations', LocationController).apiOnly()
+router.resource('purchase-mould-orders', PurchaseMouldOrderController).apiOnly()
