@@ -1,8 +1,10 @@
 import ItemCategory from '#models/item_catgory'
+import Location from '#models/location'
 import Packaging from '#models/packaging'
 import Partner from '#models/partner'
 import Uom from '#models/uom'
 import User from '#models/user'
+import Warehouse from '#models/warehouse'
 import app from '@adonisjs/core/services/app'
 import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/postgresql'
 
@@ -13,6 +15,8 @@ let uomRepository: EntityRepository<Uom>
 let itemCategoryRepository: EntityRepository<ItemCategory>
 let partnerRepository: EntityRepository<Partner>
 let packagingRepository: EntityRepository<Packaging>
+let warehouseRepository: EntityRepository<Warehouse>
+let locationRepository: EntityRepository<Location>
 
 app.booted(async () => {
   db = await app.container.make('mikro:db')
@@ -22,6 +26,8 @@ app.booted(async () => {
   itemCategoryRepository = em.getRepository(ItemCategory)
   partnerRepository = em.getRepository(Partner)
   packagingRepository = em.getRepository(Packaging)
+  warehouseRepository = em.getRepository(Warehouse)
+  locationRepository = em.getRepository(Location)
 })
 
 export {
@@ -32,4 +38,6 @@ export {
   itemCategoryRepository,
   partnerRepository,
   packagingRepository,
+  warehouseRepository,
+  locationRepository,
 }

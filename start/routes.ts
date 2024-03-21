@@ -15,6 +15,8 @@ const UomController = () => import('#controllers/uom_controller')
 const ItemCategoryController = () => import('#controllers/item_category_controller')
 const PartnerController = () => import('#controllers/partner_controller')
 const PackagingController = () => import('#controllers/packaging_controller')
+const WarehouseController = () => import('#controllers/warehouse_controller')
+const LocationController = () => import('#controllers/location_controller')
 
 router
   .get('/', async () => {
@@ -38,3 +40,5 @@ router.resource('uoms', UomController).apiOnly()
 router.resource('item-categories', ItemCategoryController).apiOnly()
 router.resource('partners', PartnerController).apiOnly()
 router.resource('packagings', PackagingController).apiOnly()
+router.resource('warehouses', WarehouseController).apiOnly()
+router.resource('locations', LocationController).apiOnly()
