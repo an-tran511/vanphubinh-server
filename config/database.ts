@@ -11,9 +11,11 @@ import Partner from '#models/partner'
 import Item from '#models/item'
 import Packaging from '#models/packaging'
 import Mould from '#models/mould'
+import Location from '#models/location'
+import Warehouse from '#models/warehouse'
 
 const databaseConfig: Options = {
-  entities: [User, Uom, ItemCategory, Partner, Item, Packaging, Mould],
+  entities: [User, Uom, ItemCategory, Partner, Item, Packaging, Mould, Warehouse, Location],
   host: env.get('DB_HOST'),
   port: Number(env.get('DB_PORT')) || 5432,
   user: env.get('DB_USER'),

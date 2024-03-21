@@ -5,6 +5,7 @@ import {
   type EventArgs,
   PrimaryKey,
   Property,
+  Opt,
 } from '@mikro-orm/postgresql'
 import BaseEntity from '#models/base_entity'
 import hash from '@adonisjs/core/services/hash'
@@ -21,10 +22,10 @@ export default class User extends BaseEntity {
   name!: string
 
   @Property({ hidden: true })
-  createdAt = new Date()
+  createdAt: Date & Opt = new Date()
 
   @Property({ hidden: true, onUpdate: () => new Date() })
-  updatedAt = new Date()
+  updatedAt: Date & Opt = new Date()
 
   @BeforeCreate()
   @BeforeUpdate()
