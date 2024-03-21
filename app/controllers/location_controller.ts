@@ -3,6 +3,7 @@ import { LocationService } from '#services/location_service'
 import { inject } from '@adonisjs/core'
 import { ListPageParamsSchema } from '#validators/list_page_params'
 import { parse } from 'valibot'
+import { LocationInputSchema } from '#validators/location'
 
 @inject()
 export default class LocationController {
@@ -19,8 +20,15 @@ export default class LocationController {
     }
   }
 
-  async store({}: HttpContext) {
-    return 'Create Location'
+  async store({ request, response }: HttpContext) {
+    const data = request.all()
+    const payload = parse(LocationInputSchema, data)
+    try {
+      const location = await this.locationService.store(payload)
+      return location
+    } catch (e) {
+      return response.internalServerError(e.message)
+    }
   }
 
   async show({}: HttpContext) {
