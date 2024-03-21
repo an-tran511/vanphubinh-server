@@ -2,6 +2,7 @@ import ItemCategory from '#models/item_catgory'
 import Location from '#models/location'
 import Packaging from '#models/packaging'
 import Partner from '#models/partner'
+import PurchaseMouldOrder from '#models/purchase_mould_order'
 import Uom from '#models/uom'
 import User from '#models/user'
 import Warehouse from '#models/warehouse'
@@ -17,6 +18,7 @@ let partnerRepository: EntityRepository<Partner>
 let packagingRepository: EntityRepository<Packaging>
 let warehouseRepository: EntityRepository<Warehouse>
 let locationRepository: EntityRepository<Location>
+let purchaseMouldOrderRepository: EntityRepository<PurchaseMouldOrder>
 
 app.booted(async () => {
   db = await app.container.make('mikro:db')
@@ -28,6 +30,7 @@ app.booted(async () => {
   packagingRepository = em.getRepository(Packaging)
   warehouseRepository = em.getRepository(Warehouse)
   locationRepository = em.getRepository(Location)
+  purchaseMouldOrderRepository = em.getRepository(PurchaseMouldOrder)
 })
 
 export {
@@ -40,4 +43,5 @@ export {
   packagingRepository,
   warehouseRepository,
   locationRepository,
+  purchaseMouldOrderRepository,
 }

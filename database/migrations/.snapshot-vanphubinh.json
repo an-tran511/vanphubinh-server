@@ -466,6 +466,166 @@
     },
     {
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "supplier_id": {
+          "name": "supplier_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "numeric(10,0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 10,
+          "scale": 0,
+          "default": "1",
+          "mappedType": "decimal"
+        },
+        "mould_id": {
+          "name": "mould_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "expected_receiving_date": {
+          "name": "expected_receiving_date",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "enumItems": [
+            "new",
+            "repair",
+            "replace"
+          ],
+          "mappedType": "enum"
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "''",
+          "mappedType": "text"
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "'draft'",
+          "enumItems": [
+            "draft",
+            "confirmed",
+            "cancelled"
+          ],
+          "mappedType": "enum"
+        }
+      },
+      "name": "purchase_mould_order",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "purchase_mould_order_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [
+        {
+          "name": "purchase_mould_order_check",
+          "expression": "quantity >= 1",
+          "definition": "check ((quantity >= 1))"
+        }
+      ],
+      "foreignKeys": {
+        "purchase_mould_order_supplier_id_foreign": {
+          "constraintName": "purchase_mould_order_supplier_id_foreign",
+          "columnNames": [
+            "supplier_id"
+          ],
+          "localTableName": "public.purchase_mould_order",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.partner",
+          "updateRule": "cascade"
+        },
+        "purchase_mould_order_mould_id_foreign": {
+          "constraintName": "purchase_mould_order_mould_id_foreign",
+          "columnNames": [
+            "mould_id"
+          ],
+          "localTableName": "public.purchase_mould_order",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.item",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
         "email": {
           "name": "email",
           "type": "text",
