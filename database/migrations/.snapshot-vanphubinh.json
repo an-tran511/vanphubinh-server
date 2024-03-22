@@ -234,6 +234,141 @@
           "primary": false,
           "nullable": false,
           "mappedType": "text"
+        },
+        "color": {
+          "name": "color",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        }
+      },
+      "name": "partner_category",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "partner_category_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "partner_id": {
+          "name": "partner_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "partner_category_id": {
+          "name": "partner_category_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        }
+      },
+      "name": "partner_partner_categories",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "partner_partner_categories_pkey",
+          "columnNames": [
+            "partner_id",
+            "partner_category_id"
+          ],
+          "composite": true,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "partner_partner_categories_partner_id_foreign": {
+          "constraintName": "partner_partner_categories_partner_id_foreign",
+          "columnNames": [
+            "partner_id"
+          ],
+          "localTableName": "public.partner_partner_categories",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.partner",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        },
+        "partner_partner_categories_partner_category_id_foreign": {
+          "constraintName": "partner_partner_categories_partner_category_id_foreign",
+          "columnNames": [
+            "partner_category_id"
+          ],
+          "localTableName": "public.partner_partner_categories",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.partner_category",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
         }
       },
       "name": "uom",
@@ -527,16 +662,6 @@
         },
         "created_date": {
           "name": "created_date",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "mappedType": "datetime"
-        },
-        "expected_receiving_date": {
-          "name": "expected_receiving_date",
           "type": "timestamptz",
           "unsigned": false,
           "autoincrement": false,

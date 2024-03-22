@@ -14,6 +14,7 @@ import Mould from '#models/mould'
 import Location from '#models/location'
 import Warehouse from '#models/warehouse'
 import PurchaseMouldOrder from '#models/purchase_mould_order'
+import PartnerCategory from '#models/partner_category'
 
 const databaseConfig: Options = {
   entities: [
@@ -27,6 +28,7 @@ const databaseConfig: Options = {
     Warehouse,
     Location,
     PurchaseMouldOrder,
+    PartnerCategory,
   ],
   host: env.get('DB_HOST'),
   port: Number(env.get('DB_PORT')) || 5432,

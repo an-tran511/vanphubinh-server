@@ -20,6 +20,17 @@ export default class PartnerController {
     }
   }
 
+  async mouldMakers({ response, request }: HttpContext) {
+    const { page = 1, perPage = 30, searchValue = '' } = request.qs()
+    const parsedParams = parse(ListPageParamsSchema, { page, perPage, searchValue })
+    try {
+      const partners = await this.partnerService.findMouldMakers(parsedParams)
+      return response.ok(partners)
+    } catch (e) {
+      return response.internalServerError(e.message)
+    }
+  }
+
   async store({ request }: HttpContext) {
     const data = request.all()
     const payload = parse(PartnerInputSchema, data)

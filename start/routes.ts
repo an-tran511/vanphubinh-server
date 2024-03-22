@@ -41,6 +41,7 @@ router
 router.resource('uoms', UomController).apiOnly()
 router.resource('item-categories', ItemCategoryController).apiOnly()
 router.resource('partners', PartnerController).apiOnly()
+router.get('/partners/mould-makers', [PartnerController, 'mouldMakers'])
 router.resource('packagings', PackagingController).apiOnly()
 router.resource('warehouses', WarehouseController).apiOnly()
 router.resource('locations', LocationController).apiOnly()

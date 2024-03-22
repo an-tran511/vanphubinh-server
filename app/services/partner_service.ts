@@ -6,12 +6,30 @@ import { wrap } from '@mikro-orm/postgresql'
 
 export class PartnerService {
   async findMany({ searchValue, page, perPage }: ListPageParams) {
-    const [uoms, total] = await partnerRepository.findAndCount(
+    const [partners, total] = await partnerRepository.findAndCount(
       { $or: [{ name: { $ilike: `%${searchValue}%` } }, { id: { $ilike: `%${searchValue}%` } }] },
       { limit: perPage, offset: (page - 1) * perPage }
     )
     const lastPage = Math.ceil(total / perPage)
-    return { data: uoms, meta: { total, page, perPage, lastPage } }
+    return { data: partners, meta: { total, page, perPage, lastPage } }
+  }
+
+  async findMouldMakers({ searchValue, page, perPage }: ListPageParams) {
+    const [partners, total] = await partnerRepository.findAndCount(
+      {
+        $and: [
+          { name: { $ilike: `%${searchValue}%` } },
+          {
+            partnerCategories: {
+              name: 'Nhà trục',
+            },
+          },
+        ],
+      },
+      { limit: perPage, offset: (page - 1) * perPage }
+    )
+    const lastPage = Math.ceil(total / perPage)
+    return { data: partners, meta: { total, page, perPage, lastPage } }
   }
 
   async store(data: PartnerInput) {

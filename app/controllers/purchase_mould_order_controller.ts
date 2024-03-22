@@ -5,14 +5,14 @@ import { ListPageParamsSchema } from '#validators/list_page_params'
 import { parse } from 'valibot'
 
 @inject()
-export default class UomController {
-  constructor(protected uomService: PurchaseMouldOrder) {}
+export default class PurchaseMouldOrderController {
+  constructor(protected purchaseMouldOrderService: PurchaseMouldOrder) {}
 
   async index({ response, request }: HttpContext) {
     const { page = 1, perPage = 30, searchValue = '' } = request.qs()
     const parsedParams = parse(ListPageParamsSchema, { page, perPage, searchValue })
     try {
-      const uoms = await this.uomService.findMany(parsedParams)
+      const uoms = await this.purchaseMouldOrderService.findMany(parsedParams)
       return response.ok(uoms)
     } catch (e) {
       return response.internalServerError(e.message)
@@ -20,18 +20,22 @@ export default class UomController {
   }
 
   async store({}: HttpContext) {
-    return 'Create Uom'
+    return 'Create PurchaseMouldOrder'
+  }
+
+  async storeMany({}: HttpContext) {
+    return 'Create Many PurchaseMouldOrder'
   }
 
   async show({}: HttpContext) {
-    return 'Show Uom'
+    return 'Show PurchaseMouldOrder'
   }
 
   async update({}: HttpContext) {
-    return 'Update Uom'
+    return 'Update PurchaseMouldOrder'
   }
 
   async destroy({}: HttpContext) {
-    return 'Delete Uom'
+    return 'Delete PurchaseMouldOrder'
   }
 }

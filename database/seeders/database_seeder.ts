@@ -5,6 +5,8 @@ import UomSeeder from '#database/seeders/uom'
 import ItemCategorySeeder from '#database/seeders/item_category'
 import WarehouseSeeder from '#database/seeders/warehouse'
 import LocationSeeder from '#database/seeders/location'
+import PartnerCategorySeeder from '#database/seeders/partner_category'
+import PartnerSeeder from '#database/seeders/partner'
 
 export default class DatabaseSeeder extends Seeder {
   run(em: EntityManager): Promise<void> {
@@ -14,6 +16,8 @@ export default class DatabaseSeeder extends Seeder {
       ItemCategorySeeder,
       WarehouseSeeder,
       LocationSeeder,
+      PartnerCategorySeeder,
+      PartnerSeeder,
     ])
   }
 }

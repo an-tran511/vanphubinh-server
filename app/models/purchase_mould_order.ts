@@ -26,9 +26,6 @@ export default class PurchaseMouldOrder extends BaseEntity {
   @Property()
   createdDate: Date = new Date()
 
-  @Property()
-  expectedReceivingDate: Date = new Date(new Date().getDate() + 3)
-
   @Enum({ type: 'PurchaseMouldOrderType' })
   type!: PurchaseMouldOrderType
 
