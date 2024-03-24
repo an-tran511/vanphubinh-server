@@ -944,18 +944,6 @@
           "nullable": false,
           "mappedType": "text"
         },
-        "max_stock_level": {
-          "name": "max_stock_level",
-          "type": "numeric(10,2)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "precision": 10,
-          "scale": 2,
-          "default": "0",
-          "mappedType": "decimal"
-        },
         "is_scrap_location": {
           "name": "is_scrap_location",
           "type": "boolean",

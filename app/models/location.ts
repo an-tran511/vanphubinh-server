@@ -37,9 +37,6 @@ export default class Location extends BaseEntity {
   @Property({ type: 'text' })
   path!: Opt<string>
 
-  @Property({ type: 'decimal', scale: 2 })
-  maxStockLevel: Opt<number> = 0
-
   @Property({ type: 'boolean' })
   isScrapLocation: boolean = false
 

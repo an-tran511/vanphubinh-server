@@ -10,7 +10,6 @@ export default class LocationSeeder extends Seeder {
     })
     const physicalLocation = em.create(Location, {
       name: 'Địa điểm vật lý',
-      maxStockLevel: 0,
       warehouse: warehouse?.id,
       path: '',
       isScrapLocation: false,
@@ -20,7 +19,6 @@ export default class LocationSeeder extends Seeder {
 
     const l1 = em.create(Location, {
       name: 'Kho',
-      maxStockLevel: 0,
       warehouse: warehouse?.id,
       parentLocation: physicalLocation.id,
       path: '',
@@ -33,7 +31,6 @@ export default class LocationSeeder extends Seeder {
       warehouse: warehouse?.id,
       parentLocation: l1.id,
       path: 'Kho',
-      maxStockLevel: 0,
       isScrapLocation: false,
       isReturnLocation: false,
       type: 'internal',
@@ -41,7 +38,6 @@ export default class LocationSeeder extends Seeder {
     for (let i = 1; i <= 10; i++) {
       em.create(Location, {
         name: `A${i}`,
-        maxStockLevel: 0,
         path: 'Kho / Kho trục L1',
         warehouse: warehouse?.id,
         parentLocation: l2.id,
