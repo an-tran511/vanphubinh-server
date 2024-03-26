@@ -35,11 +35,7 @@ export default class AuthController {
   }
 
   async logout({ auth, response }: HttpContext) {
-    try {
-      await auth.use('web').logout()
-      response.ok({ success: true })
-    } catch (error) {
-      response.json({ success: false })
-    }
+    await auth.use('web').logout()
+    response.ok({ success: true })
   }
 }
