@@ -46,7 +46,7 @@ export default class Location extends BaseEntity {
   @ManyToOne('Warehouse')
   warehouse?: Rel<Warehouse>
 
-  @Enum({ items: () => LocationTypeEnum, nullable: true })
+  @Enum({ items: () => LocationTypeEnum })
   type!: 'view' | 'internal' | 'customer' | 'inventory' | 'production' | 'transit' | 'supplier'
 
   @Formula(
