@@ -1,6 +1,11 @@
 import { ListPageParams } from '#validators/list_page_params'
-import { mouldRepository, em } from '#services/database_service'
-import { MouldInput } from '#validators/mould'
+import {
+  mouldRepository,
+  em,
+  uomRepository,
+  itemCategoryRepository,
+} from '#services/database_service'
+import { MouldInput, MultipleMouldsInput } from '#validators/mould'
 
 export class MouldService {
   async findMany({ searchValue, page, perPage }: ListPageParams) {
@@ -50,5 +55,51 @@ export class MouldService {
     await em.flush()
     await mouldRepository.populate(mould, ['uom', 'customer', 'itemCategory'])
     return mould
+  }
+
+  async bulkCreate(payload: MultipleMouldsInput) {
+    const supplier = payload.defaultSupplier?.id
+    const customer = payload.customer?.id
+    const moulds = payload.moulds
+    const mouldUom = await uomRepository.findOneOrFail({
+      name: 'cây',
+    })
+    const mouldCategory = await itemCategoryRepository.findOneOrFail({
+      name: 'Trục',
+    })
+
+    for (const mould of moulds) {
+      const existingMoulds = await mouldRepository.findAndCount({
+        packaging: { id: moulds[0].packaging?.id },
+      })
+
+      let mouldItemCode = ''
+      if (mould.packaging?.itemCode) {
+        const mouldsCount = existingMoulds[1] + 1
+        mouldItemCode =
+          mouldsCount > 1
+            ? mould.packaging?.itemCode + `.${mouldsCount}`
+            : mould.packaging?.itemCode
+      }
+
+      const newMould = mouldRepository.create({
+        name: mould.name,
+        uom: mouldUom,
+        packaging: mould.packaging?.id,
+        itemCode: mouldItemCode,
+        customer,
+        itemCategory: mouldCategory,
+        defaultSupplier: supplier,
+        isStockable: true,
+        attributes: {
+          dimension: mould.dimension,
+          numberOfMoulds: mould.numberOfMoulds,
+        },
+      })
+      em.persist(newMould)
+    }
+
+    await em.flush()
+    return { success: true }
   }
 }

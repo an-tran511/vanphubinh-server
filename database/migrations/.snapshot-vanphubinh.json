@@ -495,15 +495,6 @@
           "default": "''",
           "mappedType": "text"
         },
-        "attributes": {
-          "name": "attributes",
-          "type": "jsonb",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "mappedType": "json"
-        },
         "type": {
           "name": "type",
           "type": "text",
@@ -517,6 +508,24 @@
             "mould"
           ],
           "mappedType": "enum"
+        },
+        "packaging_id": {
+          "name": "packaging_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "text"
+        },
+        "attributes": {
+          "name": "attributes",
+          "type": "jsonb",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "json"
         }
       },
       "name": "item",
@@ -593,6 +602,19 @@
             "id"
           ],
           "referencedTableName": "public.partner",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "item_packaging_id_foreign": {
+          "constraintName": "item_packaging_id_foreign",
+          "columnNames": [
+            "packaging_id"
+          ],
+          "localTableName": "public.item",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.item",
           "deleteRule": "set null",
           "updateRule": "cascade"
         }

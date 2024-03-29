@@ -7,8 +7,10 @@ import { wrap } from '@mikro-orm/postgresql'
 export class PartnerService {
   async findMany({ searchValue, page, perPage }: ListPageParams) {
     const [partners, total] = await partnerRepository.findAndCount(
-      { $or: [{ name: { $ilike: `%${searchValue}%` } }, { id: { $ilike: `%${searchValue}%` } }] },
-      { limit: perPage, offset: (page - 1) * perPage }
+      {
+        $or: [{ name: { $ilike: `%${searchValue}%` } }, { id: { $ilike: `%${searchValue}%` } }],
+      },
+      { limit: perPage, offset: (page - 1) * perPage, populate: ['partnerCategories'] }
     )
     const lastPage = Math.ceil(total / perPage)
     return { data: partners, meta: { total, page, perPage, lastPage } }
@@ -21,7 +23,7 @@ export class PartnerService {
           { name: { $ilike: `%${searchValue}%` } },
           {
             partnerCategories: {
-              name: 'Nhà trục',
+              name: { $eq: 'Nhà trục' },
             },
           },
         ],

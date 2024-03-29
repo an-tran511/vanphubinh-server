@@ -3,7 +3,7 @@ import { MouldService } from '#services/mould_service'
 import { inject } from '@adonisjs/core'
 import { ListPageParamsSchema } from '#validators/list_page_params'
 import { parse } from 'valibot'
-import { MouldInputSchema } from '#validators/mould'
+import { MouldInputSchema, MultipleMouldsInputSchema } from '#validators/mould'
 
 @inject()
 export default class MouldController {
@@ -26,6 +26,17 @@ export default class MouldController {
     try {
       const newMould = await this.mouldService.store(payload)
       return response.ok(newMould)
+    } catch (e) {
+      return response.internalServerError(e.message)
+    }
+  }
+
+  async bulkCreate({ request, response }: HttpContext) {
+    const body = request.body()
+    const payload = parse(MultipleMouldsInputSchema, body)
+    try {
+      const newMoulds = await this.mouldService.bulkCreate(payload)
+      return response.ok(newMoulds)
     } catch (e) {
       return response.internalServerError(e.message)
     }

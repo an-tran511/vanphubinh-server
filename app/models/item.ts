@@ -1,5 +1,13 @@
 import { nanoid } from '#utils/id_generator'
-import { Entity, Enum, ManyToOne, PrimaryKey, Property } from '@mikro-orm/postgresql'
+import {
+  Entity,
+  Enum,
+  ManyToOne,
+  type Opt,
+  PrimaryKey,
+  Property,
+  type Rel,
+} from '@mikro-orm/postgresql'
 import Uom from '#models/uom'
 import Partner from '#models/partner'
 import BaseEntity from '#models/base_entity'
@@ -18,39 +26,39 @@ export default class Item extends BaseEntity {
   @ManyToOne({
     entity: () => Uom,
   })
-  uom!: Uom
+  uom!: Rel<Uom>
 
   @ManyToOne({
     entity: () => Partner,
     nullable: true,
   })
-  customer!: Partner
+  customer!: Rel<Partner> | null
 
   @ManyToOne({
     entity: () => ItemCategory,
     nullable: true,
   })
-  itemCategory!: ItemCategory | null
+  itemCategory!: Rel<ItemCategory> | null
 
   @ManyToOne({
     entity: () => Partner,
     nullable: true,
   })
-  defaultSupplier!: Partner | null
+  defaultSupplier!: Rel<Partner> | null
 
   @Property({
     type: 'text',
   })
-  itemCode: string = ''
+  itemCode: Opt<string> = ''
 
   @Property({ default: true })
   isStockable!: boolean
 
   @Property({ type: 'text' })
-  notes: string = ''
+  notes: Opt<string> = ''
 
   @Property({ type: 'json' })
-  attributes?: object
+  attributes?: Opt<object>
 
   @Enum({ nullable: true })
   type!: 'packaging' | null
