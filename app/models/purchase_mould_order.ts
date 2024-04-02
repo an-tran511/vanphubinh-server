@@ -1,5 +1,12 @@
-import { nanoid } from '#utils/id_generator'
-import { Check, Entity, Enum, ManyToOne, PrimaryKey, Property } from '@mikro-orm/postgresql'
+import {
+  Check,
+  Entity,
+  Enum,
+  ManyToOne,
+  type Opt,
+  PrimaryKey,
+  Property,
+} from '@mikro-orm/postgresql'
 import Partner from '#models/partner'
 import Mould from '#models/mould'
 import BaseEntity from '#models/base_entity'
@@ -7,8 +14,13 @@ import BaseEntity from '#models/base_entity'
 @Entity()
 @Check({ expression: 'quantity >= 1' })
 export default class PurchaseMouldOrder extends BaseEntity {
-  @PrimaryKey({ type: 'text', primary: true })
-  id: string = nanoid()
+  @PrimaryKey({
+    type: 'text',
+    defaultRaw: `concat('LĐT',to_char(current_timestamp, 'YYMM'), '-', nextval('purchase_mould_order_seq'))`,
+    primary: true,
+    nullable: false,
+  })
+  id?: string
 
   @ManyToOne({
     entity: () => Partner,
@@ -23,8 +35,8 @@ export default class PurchaseMouldOrder extends BaseEntity {
   })
   mould!: Mould
 
-  @Property()
-  createdDate: Date = new Date()
+  @Property({ nullable: true })
+  mouldIssueAt!: Opt<Date>
 
   @Enum({ type: 'PurchaseMouldOrderType' })
   type!: PurchaseMouldOrderType
@@ -33,12 +45,14 @@ export default class PurchaseMouldOrder extends BaseEntity {
   notes: string = ''
 
   @Enum({ type: 'PurchaseMouldOrderStatus' })
-  status: PurchaseMouldOrderStatus = PurchaseMouldOrderStatus.DRAFT
+  status: PurchaseMouldOrderStatus = PurchaseMouldOrderStatus.NEW
 }
 
 export enum PurchaseMouldOrderStatus {
-  DRAFT = 'draft',
-  CONFIRMED = 'confirmed',
+  NEW = 'new',
+  MOULD_ISSUE = 'mould_issue',
+  ONGOING = 'ongoing',
+  COMPLETED = 'completed',
   CANCELLED = 'cancelled',
 }
 
@@ -46,4 +60,5 @@ export enum PurchaseMouldOrderType {
   NEW = 'new',
   REPAIR = 'repair',
   REPLACE = 'replace',
+  WARRANTY = 'warranty',
 }

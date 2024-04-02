@@ -630,6 +630,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "concat('LĐT',to_char(current_timestamp, 'YYMM'), '-', nextval('purchase_mould_order_seq'))",
           "mappedType": "text"
         },
         "created_at": {
@@ -682,13 +683,13 @@
           "nullable": false,
           "mappedType": "text"
         },
-        "created_date": {
-          "name": "created_date",
+        "mould_issue_at": {
+          "name": "mould_issue_at",
           "type": "timestamptz",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "length": 6,
           "mappedType": "datetime"
         },
@@ -702,7 +703,8 @@
           "enumItems": [
             "new",
             "repair",
-            "replace"
+            "replace",
+            "warranty"
           ],
           "mappedType": "enum"
         },
@@ -723,10 +725,12 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "default": "'draft'",
+          "default": "'new'",
           "enumItems": [
-            "draft",
-            "confirmed",
+            "new",
+            "mould_issue",
+            "ongoing",
+            "completed",
             "cancelled"
           ],
           "mappedType": "enum"

@@ -31,11 +31,11 @@ export default class MouldController {
     }
   }
 
-  async bulkCreate({ request, response }: HttpContext) {
+  async storeMany({ request, response }: HttpContext) {
     const body = request.body()
     const payload = parse(MultipleMouldsInputSchema, body)
     try {
-      const newMoulds = await this.mouldService.bulkCreate(payload)
+      const newMoulds = await this.mouldService.storeMany(payload)
       return response.ok(newMoulds)
     } catch (e) {
       return response.internalServerError(e.message)

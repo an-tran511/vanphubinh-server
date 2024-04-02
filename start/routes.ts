@@ -20,17 +20,12 @@ const LocationController = () => import('#controllers/location_controller')
 const PurchaseMouldOrderController = () => import('#controllers/purchase_mould_order_controller')
 const MouldController = () => import('#controllers/mould_controller')
 
-router
-  .get('/', async () => {
-    return {
-      hello: 'world',
-    }
-  })
-  .use(
-    middleware.auth({
-      guards: ['web'],
-    })
-  )
+router.get('/', async () => {
+  return {
+    hello: new Date().toString(),
+  }
+})
+
 router
   .group(() => {
     router.post('/login', [AuthController, 'login'])
@@ -47,4 +42,5 @@ router.resource('warehouses', WarehouseController).apiOnly()
 router.resource('locations', LocationController).apiOnly()
 router.resource('purchase-mould-orders', PurchaseMouldOrderController).apiOnly()
 router.resource('moulds', MouldController).apiOnly()
-router.post('/moulds/bulk', [MouldController, 'bulkCreate'])
+router.post('/moulds/bulk', [MouldController, 'storeMany'])
+router.post('/purchase-mould-orders/bulk', [PurchaseMouldOrderController, 'storeMany'])

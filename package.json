@@ -62,6 +62,7 @@
     "@mikro-orm/reflection": "^6.1.11",
     "@mikro-orm/seeder": "^6.1.11",
     "@poppinss/utils": "^6.7.2",
+    "adonisjs-scheduler": "^1.0.5",
     "luxon": "^3.4.4",
     "nanoid": "^5.0.6",
     "pg": "^8.11.3",

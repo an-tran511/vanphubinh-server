@@ -19,7 +19,7 @@ export class MouldService {
       {
         limit: perPage,
         offset: (page - 1) * perPage,
-        populate: ['uom', 'customer', 'itemCategory'],
+        populate: ['uom', 'customer', 'itemCategory', 'defaultSupplier'],
       }
     )
     const lastPage = Math.ceil(total / perPage)
@@ -57,7 +57,7 @@ export class MouldService {
     return mould
   }
 
-  async bulkCreate(payload: MultipleMouldsInput) {
+  async storeMany(payload: MultipleMouldsInput) {
     const supplier = payload.defaultSupplier?.id
     const customer = payload.customer?.id
     const moulds = payload.moulds
